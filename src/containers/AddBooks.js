@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { addBook } from "../redux/actions/actionAddBooks";
 
 const AddBooks = ({ libraryData, addBooks }) => {
-  console.log(libraryData);
+  //console.log(libraryData);
   const initialState = {
     title: "",
     author: "",
@@ -19,6 +19,36 @@ const AddBooks = ({ libraryData, addBooks }) => {
     // VIDER LE INPUT
     setNewData(initialState);
   };
+
+  const displayData =
+    libraryData.length > 0 ? (
+      libraryData.map((data) => {
+        return (
+          <li
+            key={data.id}
+            className="list-group-item list-group-item-light d-flex justify-content-between mt-4"
+          >
+            <span>
+              <strong>Titre: </strong> {data.title}
+            </span>
+            <span>
+              <strong>Auteur: </strong> {data.author}
+            </span>
+            <span className="btn btn-danger">x</span>
+          </li>
+        );
+      })
+    ) : (
+      <p className="text-center mt-4">Aucune data à afficher</p>
+    );
+
+  const deleteAllBooksBtn = libraryData.length > 0 && (
+    <div className="d-flex justify-content-center">
+      <button className="btn btn-danger mt-4 mb-5">
+        Effacer tous les livres
+      </button>
+    </div>
+  );
 
   return (
     <main role="main">
@@ -64,16 +94,9 @@ const AddBooks = ({ libraryData, addBooks }) => {
       <div className="container" style={{ minHeight: "200px" }}>
         <div className="row">
           <div className="col-md-12">
-            <ul className="list-group">
-              <li className="list-group-item list-group-item-light d-flex justify-content-between mt-4">
-                livres enregistrés ici
-              </li>
-            </ul>
-            <div className="d-flex justify-content-center">
-              <button className="btn btn-danger mt-4 mb-5">
-                Effacer tous les livres
-              </button>
-            </div>
+            <ul className="list-group">{displayData}</ul>
+
+            {deleteAllBooksBtn}
           </div>
         </div>
       </div>
