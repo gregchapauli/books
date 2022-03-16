@@ -5,11 +5,9 @@ import AddBooks from "./containers/AddBooks";
 function App() {
   return (
     <div className="App">
-      <p>
-        <NavBar />
-        <AddBooks />
-        <Footer />
-      </p>
+      <NavBar />
+      <AddBooks />
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 const AddBooks = () => {
+  const initialState = {
+    title: "",
+    author: "",
+  };
+
+  const [newData, setNewData] = useState(initialState);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(newData);
+  };
+
   return (
     <main role="main">
       <div className="container-fluid bg-dark text-light p-5">
@@ -8,21 +20,29 @@ const AddBooks = () => {
           <h1 className="display-4">BOOKS</h1>
           <p>Ajouter un livre à votre bibliothèque</p>
 
-          <form className="row justify-content-center">
+          <form className="row justify-content-center" onSubmit={handleSubmit}>
             <div className="col">
               <input
+                value={newData.title}
                 type="text"
                 className="form-control"
                 placeholder="Titre"
                 required
+                onChange={(e) =>
+                  setNewData({ ...newData, title: e.target.value })
+                }
               />
             </div>
             <div className="col">
               <input
+                value={newData.author}
                 type="text"
                 className="form-control ms-1"
                 placeholder="Auteur"
                 required
+                onChange={(e) =>
+                  setNewData({ ...newData, author: e.target.value })
+                }
               />
             </div>
             <div className="col">
