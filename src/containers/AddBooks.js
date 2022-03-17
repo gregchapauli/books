@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addBook } from "../redux/actions/actionAddBooks";
+import FlipMove from "react-flip-move";
 
 const AddBooks = ({ libraryData, addBooks }) => {
   //console.log(libraryData);
@@ -22,22 +23,24 @@ const AddBooks = ({ libraryData, addBooks }) => {
 
   const displayData =
     libraryData.length > 0 ? (
-      libraryData.map((data) => {
-        return (
-          <li
-            key={data.id}
-            className="list-group-item list-group-item-light d-flex justify-content-between mt-4"
-          >
-            <span>
-              <strong>Titre: </strong> {data.title}
-            </span>
-            <span>
-              <strong>Auteur: </strong> {data.author}
-            </span>
-            <span className="btn btn-danger">x</span>
-          </li>
-        );
-      })
+      <FlipMove>
+        {libraryData.map((data) => {
+          return (
+            <li
+              key={data.id}
+              className="list-group-item list-group-item-light d-flex justify-content-between mt-4"
+            >
+              <span>
+                <strong>Titre: </strong> {data.title}
+              </span>
+              <span>
+                <strong>Auteur: </strong> {data.author}
+              </span>
+              <span className="btn btn-danger">x</span>
+            </li>
+          );
+        })}
+      </FlipMove>
     ) : (
       <p className="text-center mt-4">Aucune data à afficher</p>
     );
