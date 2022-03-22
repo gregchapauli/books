@@ -11,7 +11,7 @@ const NavBar = () => {
           </a>
         </h4>
 
-        <nav className="btn-group">
+        <nav className="btn-group position-fixed end-0 pe-3">
           <Link to="/" className="btn btn-light">
             Accueil
           </Link>
