@@ -15,6 +15,52 @@ const SearchBook = () => {
     dispatch(fetchBooks(title));
   };
 
+  const displayFetchedBooks = state.isloading ? (
+    <div className="d-flex justify-content-center">
+      <div className="spinner-border text-info" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  ) : state.error !== "" ? (
+    <p>{state.error}</p>
+  ) : (
+    state.fetchBooks.map((data) => {
+      return (
+        <div className="card-mb-2" key={data.id}>
+          <div className="card-header">
+            <h5 className="mb-0">
+              <button
+                className="btn btn-link collapsed"
+                data-toggle="collapse"
+                data-target={`#${data.id}`}
+                aria-expanded="false"
+              >
+                {data.volumeInfo.title}
+              </button>
+            </h5>
+          </div>
+          <div id={data.id} className="collapse" data-parent="accordion">
+            <div className="card-body">
+              <img
+                src={data.volumeInfo.imageLinks.thumbnail}
+                alt={data.volumeInfo.title}
+              />
+              <br />
+
+              {/*
+                        Titre
+                        Auteur
+                        Descriptiojn
+                        Btn plus d'infos
+                        Btn Enregistrer
+                        */}
+            </div>
+          </div>
+        </div>
+      );
+    })
+  );
+
   return (
     <main role="main">
       <div className="container-fluid bg-dark text-light p-5">
@@ -42,23 +88,7 @@ const SearchBook = () => {
       </div>
 
       <div className="container" style={{ minHeight: "200px" }}>
-        <div className="accordion">
-          <div className="card-mb-2">
-            <div className="card-header"></div>
-            <div className="collapse" data-parent="accordion">
-              <div className="card-body">
-                {/*
-                        Image
-                        Titre
-                        Auteur
-                        Descriptiojn
-                        Btn plus d'infos
-                        Btn Enregistrer
-                        */}
-              </div>
-            </div>
-          </div>
-        </div>
+        <div className="accordion">{displayFetchedBooks}</div>
       </div>
     </main>
   );
