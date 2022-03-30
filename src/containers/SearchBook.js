@@ -24,7 +24,7 @@ const SearchBook = () => {
   ) : state.error !== "" ? (
     <p>{state.error}</p>
   ) : (
-    state.fetchBooks.map((data) => {
+    state.fetchedBooks.map((data) => {
       return (
         <div className="card-mb-2" key={data.id}>
           <div className="card-header">
@@ -41,19 +41,27 @@ const SearchBook = () => {
           </div>
           <div id={data.id} className="collapse" data-parent="accordion">
             <div className="card-body">
-              <img
-                src={data.volumeInfo.imageLinks.thumbnail}
-                alt={data.volumeInfo.title}
-              />
+              {data.volumeInfo.hasOwnProperty("imageLinks") && (
+                <img
+                  src={data.volumeInfo.imageLinks.thumbnail}
+                  alt={data.volumeInfo.title}
+                />
+              )}
               <br />
-
-              {/*
-                        Titre
-                        Auteur
-                        Descriptiojn
-                        Btn plus d'infos
-                        Btn Enregistrer
-                        */}
+              <h4 className="card-title">Titre: {data.volumeInfo.title}</h4>
+              <h5 className="card-title">Auteurs: {data.volumeInfo.authors}</h5>
+              <p className="card-text">
+                Description: {data.volumeInfo.description}
+              </p>
+              <a
+                className="btn btn-outline-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={data.volumeInfo.previewLink}
+              >
+                Plus d'infos
+              </a>
+              <button className="btn btn-outline-secondary">Enregistrer</button>
             </div>
           </div>
         </div>
