@@ -39,7 +39,7 @@ const SearchBook = () => {
               </button>
             </h5>
           </div>
-          <div id={data.id} className="collapse" data-parent="accordion">
+          <div id={data.id} className="collapse" data-parent="#accordion">
             <div className="card-body">
               {data.volumeInfo.hasOwnProperty("imageLinks") && (
                 <img
@@ -96,7 +96,7 @@ const SearchBook = () => {
       </div>
 
       <div className="container" style={{ minHeight: "200px" }}>
-        <div className="accordion">{displayFetchedBooks}</div>
+        <div id="accordion">{displayFetchedBooks}</div>
       </div>
     </main>
   );
