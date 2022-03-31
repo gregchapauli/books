@@ -15,10 +15,10 @@ const SearchBook = () => {
     dispatch(fetchBooks(title));
   };
 
-  const displayFetchedBooks = state.isloading ? (
-    <div className="d-flex justify-content-center">
-      <div className="spinner-border text-info" role="status">
-        <span className="sr-only">Loading...</span>
+  const displayFetchedBooks = state.isLoading ? (
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border m-5" role="status">
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
   ) : state.error !== "" ? (
@@ -26,7 +26,7 @@ const SearchBook = () => {
   ) : (
     state.fetchedBooks.map((data) => {
       return (
-        <div className="card-mb-2" key={data.id}>
+        <div className="card border-secondary mt-2" key={data.id}>
           <div className="card-header">
             <h5 className="mb-0">
               <button
@@ -40,7 +40,7 @@ const SearchBook = () => {
             </h5>
           </div>
           <div id={data.id} className="collapse" data-parent="#accordion">
-            <div className="card-body">
+            <div className="card-body mb-3">
               {data.volumeInfo.hasOwnProperty("imageLinks") && (
                 <img
                   src={data.volumeInfo.imageLinks.thumbnail}
@@ -61,7 +61,9 @@ const SearchBook = () => {
               >
                 Plus d'infos
               </a>
-              <button className="btn btn-outline-secondary">Enregistrer</button>
+              <button className="btn btn-outline-secondary ms-3">
+                Enregistrer
+              </button>
             </div>
           </div>
         </div>
