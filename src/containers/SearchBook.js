@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBooks } from "../redux/actions/actionFetchBooks";
+import { addBook } from "../redux/actions/actionAddBooks";
 
 const SearchBook = () => {
   const [title, setTitle] = useState("");
@@ -13,6 +14,11 @@ const SearchBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(fetchBooks(title));
+  };
+
+  const handleSave = (title, author) => {
+    const bookTosave = { title, author };
+    dispatch(addBook(bookTosave));
   };
 
   const displayFetchedBooks = state.isLoading ? (
@@ -61,7 +67,12 @@ const SearchBook = () => {
               >
                 Plus d'infos
               </a>
-              <button className="btn btn-outline-secondary ms-3">
+              <button
+                className="btn btn-outline-secondary ms-3"
+                onClick={() =>
+                  handleSave(data.volumeInfo.title, data.volumeInfo.authors)
+                }
+              >
                 Enregistrer
               </button>
             </div>
